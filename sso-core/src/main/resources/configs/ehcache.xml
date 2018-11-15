@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:jsr107='http://www.ehcache.org/v3/jsr107'
+        xmlns='http://www.ehcache.org/v3'>
+
+    <service>
+        <jsr107:defaults enable-management="true" enable-statistics="true"/>
+    </service>
+
+    <!-- 持久化成文件-->
+    <persistence directory="./cache"></persistence>
+
+    <!-- 创建缓存-->
+    <cache alias="sso">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.lang.String</value-type>
+        <resources>
+            <heap unit="entries">1000</heap>
+            <offheap unit="MB">100</offheap>
+            <disk persistent="true" unit="MB">100</disk>
+        </resources>
+    </cache>
+
+    <!-- 缓存属性-->
+    <!--<cache-template name="sso-cache">-->
+        <!--<listeners>-->
+            <!--<listener>-->
+                <!--&lt;!&ndash; the the main cache event listener&ndash;&gt;-->
+                <!--<class>com.demo.alertmanager.services.CacheEventLogger</class>-->
+                <!--<event-firing-mode>ASYNCHRONOUS</event-firing-mode>-->
+                <!--<event-ordering-mode>UNORDERED</event-ordering-mode>-->
+                <!--<events-to-fire-on>CREATED</events-to-fire-on>-->
+                <!--<events-to-fire-on>UPDATED</events-to-fire-on>-->
+                <!--<events-to-fire-on>EXPIRED</events-to-fire-on>-->
+                <!--<events-to-fire-on>REMOVED</events-to-fire-on>-->
+                <!--<events-to-fire-on>EVICTED</events-to-fire-on>-->
+            <!--</listener>-->
+        <!--</listeners>-->
+    <!--</cache-template>-->
+
+</config>

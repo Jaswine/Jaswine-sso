@@ -1,0 +1,185 @@
+#
+#                       .::::.
+#                     .::::::::.
+#                    :::::::::::
+#                 ..:::::::::::'
+#              '::::::::::::'
+#                .::::::::::
+#           '::::::::::::::..
+#                ..::::::::::::.
+#              ``::::::::::::::::
+#               ::::``:::::::::'        .:::.
+#              ::::'   ':::::'       .::::::::.
+#            .::::'      ::::     .:::::::'::::.
+#           .:::'       :::::  .:::::::::' ':::::.
+#          .::'        :::::.:::::::::'      ':::::.
+#         .::'         ::::::::::::::'         ``::::.
+#     ...:::           ::::::::::::'              ``::.
+#    ```` ':.          ':::::::::'                  ::::..
+#                       '.:::::'                    ':'````..
+# SpringBoot配置说明参见博客
+# 博客地址:www.jaswine.club
+#################################################################
+
+
+####################
+#   profiles配置   #
+####################
+spring:
+  profiles:
+    active: dev
+---
+#   测试环境   #
+spring:
+  profiles: dev
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://106.14.208.167:3306/jaswine?characterEncoding=utf8&useSSL=false
+      username: jasmine
+      password: Jasmine1017@wyz
+
+server:
+  port: 16000
+---
+#   正式环境   #
+spring:
+  profiles: pro
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://106.14.208.167:3306/jaswine?characterEncoding=utf8&useSSL=true
+      username: jasmine
+      password: Jasmine1017@wyz
+
+server:
+  port: 6002
+---
+###############
+#   项目配置   #
+###############
+spring:
+  application:
+    name: sso-core
+---
+#################
+#   服务器配置   #
+#################
+server:
+  servlet:
+    context-path: /sso
+  tomcat:
+    uri-encoding: UTF-8
+---
+######################
+#   数据库连接池配置   #
+######################
+spring:
+  datasource:
+    druid:
+      initial-size: 0
+      max-active: 20
+      min-idle: 1
+      max-wait: 6000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 25200000
+      remove-abandoned: true
+      remove-abandoned-timeout: 18000
+      log-abandoned: false
+      web-stat-filter:
+        enabled: true
+        url-pattern: /druid
+---
+###################
+#   Mybatis配置   #
+###################
+mybatis:
+  #  config-location: classpath:mappers/mybatis.xml
+  mapper-locations: classpath:mappers/*.xml
+  check-config-location: true
+  type-aliases-package: com.jaswine.core.entity
+  configuration:
+    jdbc-type-for-null: null
+    cache-enabled: false
+    multiple-result-sets-enabled: true
+    default-executor-type: reuse
+    lazy-loading-enabled: false
+    aggressive-lazy-loading: true
+    default-statement-timeout: 3000
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: partial
+    auto-mapping-unknown-column-behavior: none
+    default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler
+    return-instance-for-empty-row: false
+    local-cache-scope: session
+
+
+#   Pagehelper插件   #
+pagehelper:
+  auto-dialect: true
+  close-conn: false
+  reasonable: true
+---
+#################
+#   NoSQL配置   #
+#################
+
+#   Redis   #
+spring:
+  redis:
+    host: 47.105.74.250
+    port: 6379
+    password: Jasmine1017@wyz
+    database: 1
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 0
+---
+#   MongoDB   #
+
+---
+#################
+#   cache配置   #
+#################
+
+#   Ehcache   #
+spring:
+  cache:
+    jcache:
+      config: classpath:configs/ehcache.xml
+---
+###################
+#  Security配置   #
+###################
+
+---
+#######################
+#  消息队列(JMS)配置   #
+#######################
+
+---
+###############
+#   日志配置   #
+###############
+spring:
+  output:
+    ansi:
+      enabled: always
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+debug: false
+---
+

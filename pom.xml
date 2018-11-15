@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.jaswine</groupId>
+    <artifactId>Jaswine-sso</artifactId>
+    <version>${jaswine-sso.version}</version>
+    <packaging>pom</packaging>
+
+    <name>Jaswine-sso</name>
+    <url>http://www.jaswine.club</url>
+    <description>
+        基于SpringBoot完成的SSO系统
+    </description>
+
+    <developers>
+        <developer>
+            <id>Jaswine</id>
+            <name>王远志</name>
+            <email>yuanzhi_wang@163.com</email>
+            <url>http://jaswine.club</url>
+            <roles>
+                <role>Owner</role>
+                <role>Manager</role>
+                <role>Project Manager</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <!--<licenses>-->
+        <!--<license>-->
+            <!--<name></name>-->
+            <!--<url></url>-->
+        <!--</license>-->
+    <!--</licenses>-->
+
+    <!--<scm>-->
+        <!--<connection></connection>-->
+        <!--<developerConnection></developerConnection>-->
+        <!--<url></url>-->
+        <!--<tag></tag>-->
+    <!--</scm>-->
+
+    <!--环境配置-->
+    <!--<profiles>-->
+    <!--<profile></profile>-->
+    <!--</profiles>-->
+
+    <!--聚合模块-->
+    <modules>
+        <module>sso-core</module>
+        <module>sso-browser</module>
+        <module>sso-app</module>
+        <module>sso-demo</module>
+    </modules>
+
+    <!--属性管理-->
+    <properties>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
+
+        <jaswine-sso.version>1.0-SNAPSHOT</jaswine-sso.version>
+
+        <!--springBoot版本-->
+        <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
+        <!--springCloud版本-->
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+
+        <!--数据库-->
+        <mysql.version>5.1.46</mysql.version>
+        <SpringBootDruidStarter.version>1.1.10</SpringBootDruidStarter.version>
+        <SpringBootMybatisStarter.version>1.3.2</SpringBootMybatisStarter.version>
+        <SpringBootpagehelper.version>1.2.5</SpringBootpagehelper.version>
+
+        <!--redis-->
+        <jedis.version>2.9.0</jedis.version>
+
+        <!--工具-->
+        <lombok.version>1.18.2</lombok.version>
+        <zxing.version>3.3.3</zxing.version>
+        <sunMail.version>1.6.1</sunMail.version>
+        <thumbnailator.version>0.4.8</thumbnailator.version>
+        <ehcache.version>3.6.1</ehcache.version>
+
+        <!--jwt-->
+        <auth.version>3.4.0</auth.version>
+
+        <!--API文档-->
+        <springfox.version>2.9.2</springfox.version>
+
+        <!--apache-commons-->
+        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <commons-collection4.version>4.2</commons-collection4.version>
+        <!--Java规范-->
+        <javacache.version>1.1.0</javacache.version>
+
+        <!--自定义依赖-->
+        <jaswinecommons.version>1.1-SNAPSHOT</jaswinecommons.version>
+    </properties>
+
+    <!--依赖管理-->
+    <dependencyManagement>
+        <dependencies>
+            <!--spring-boot依赖-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--spring-cloud依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--数据库相关-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${SpringBootMybatisStarter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${SpringBootDruidStarter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${SpringBootpagehelper.version}</version>
+            </dependency>
+
+            <!--工具-->
+            <!--lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!--Google二维码-->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+            <!--Google图片压缩-->
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>${thumbnailator.version}</version>
+            </dependency>
+            <!--SunMail(JavaMail对其有依赖)-->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${sunMail.version}</version>
+            </dependency>
+            <!-- springfox-swagger -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <!-- springfox-swagger-ui -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+            <!--cache-->
+            <dependency>
+                <groupId>org.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+            <!--SSO-->
+            <!--JWT-->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${auth.version}</version>
+            </dependency>
+
+            <!-- redis client -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <!--Apache-commons-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collection4.version}</version>
+            </dependency>
+
+            <!--Java 规范-->
+            <!--Java-Cache-->
+            <dependency>
+                <groupId>javax.cache</groupId>
+                <artifactId>cache-api</artifactId>
+                <version>${javacache.version}</version>
+            </dependency>
+
+            <!--自定义依赖-->
+            <dependency>
+                <groupId>com.jaswine</groupId>
+                <artifactId>jaswine-commons</artifactId>
+                <version>${jaswinecommons.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!--插件依赖-->
+    <build>
+        <finalName>jaswine-sso</finalName>
+        <!--<sourceDirectory>src/java</sourceDirectory>-->
+    </build>
+
+    <!--仓库配置-->
+    <repositories>
+        <!--自定义仓库-->
+        <repository>
+            <id>jaswine-maven-repo</id>
+            <url>https://raw.githubusercontent.com/jaswine/Maven-Repo/master/repo</url>
+        </repository>
+    </repositories>
+
+</project>
