@@ -12,8 +12,16 @@
     <name>Jaswine-sso</name>
     <url>http://www.jaswine.club</url>
     <description>
-        基于SpringBoot完成的SSO系统
+        基于SpringBoot，SpringSecurity完成的SSO系统
     </description>
+
+    <repositories>
+        <repository>
+            <id>jaswine-maven-repo</id>
+            <url>https://raw.githubusercontent.com/jaswine/Maven-Repo/master/repo</url>
+        </repository>
+    </repositories>
+
 
     <developers>
         <developer>
@@ -48,7 +56,6 @@
     <!--<profile></profile>-->
     <!--</profiles>-->
 
-    <!--聚合模块-->
     <modules>
         <module>sso-core</module>
         <module>sso-browser</module>
@@ -56,7 +63,6 @@
         <module>sso-demo</module>
     </modules>
 
-    <!--属性管理-->
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -65,7 +71,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
 
-        <jaswine-sso.version>1.0-SNAPSHOT</jaswine-sso.version>
+        <jaswine-sso.version>1.0</jaswine-sso.version>
 
         <!--springBoot版本-->
         <spring.boot.version>2.0.4.RELEASE</spring.boot.version>
@@ -102,7 +108,7 @@
         <javacache.version>1.1.0</javacache.version>
 
         <!--自定义依赖-->
-        <jaswinecommons.version>1.1-SNAPSHOT</jaswinecommons.version>
+        <jcommons.version>1.0.1</jcommons.version>
     </properties>
 
     <!--依赖管理-->
@@ -236,7 +242,7 @@
             <dependency>
                 <groupId>com.jaswine</groupId>
                 <artifactId>jaswine-commons</artifactId>
-                <version>${jaswinecommons.version}</version>
+                <version>${jcommons.version}</version>
             </dependency>
 
         </dependencies>
@@ -245,16 +251,6 @@
     <!--插件依赖-->
     <build>
         <finalName>jaswine-sso</finalName>
-        <!--<sourceDirectory>src/java</sourceDirectory>-->
     </build>
-
-    <!--仓库配置-->
-    <repositories>
-        <!--自定义仓库-->
-        <repository>
-            <id>jaswine-maven-repo</id>
-            <url>https://raw.githubusercontent.com/jaswine/Maven-Repo/master/repo</url>
-        </repository>
-    </repositories>
 
 </project>

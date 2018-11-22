@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jaswine.sso.dao.SysUserDao">
+<mapper namespace="com.jaswine.core.dao.SysUserDao">
 
+
+    <select id="getUserByUsername" parameterType="java.lang.String" resultType="com.jaswine.core.bean.SysUser">
+        SELECT * FROM sysuser
+    </select>
+
+    <!--新增用户-->
+    <insert id="addUser" parameterType="com.jaswine.core.bean.SysUser">
+        INSERT INTO sysuser(id, username, password,
+                            nickname, tel, email,
+                            createtime,enable)
+                            VALUES (
+                            #{id},#{userName},#{password},
+                            #{nickname},#{tel},#{email},
+                            sysdate(),'1')
+    </insert>
 
 </mapper>

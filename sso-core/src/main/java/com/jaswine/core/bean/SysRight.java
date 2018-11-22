@@ -1,15 +1,15 @@
-package com.jaswine.core.entity;
+package com.jaswine.core.bean;
+
 
 /**
- * 系统角色
+ * 系统功能
  * @author Jaswine
  */
-public class SysRole {
+public class SysRight {
 
   private String id;
-  private String roleName;
   private String parentId;
-  private String isEnacle;
+  private String rightName;
   private java.sql.Timestamp createTime;
   private String description;
 
@@ -23,15 +23,6 @@ public class SysRole {
   }
 
 
-  public String getRoleName() {
-    return roleName;
-  }
-
-  public void setRoleName(String roleName) {
-    this.roleName = roleName;
-  }
-
-
   public String getParentId() {
     return parentId;
   }
@@ -41,12 +32,12 @@ public class SysRole {
   }
 
 
-  public String getIsEnacle() {
-    return isEnacle;
+  public String getRightName() {
+    return rightName;
   }
 
-  public void setIsEnacle(String isEnacle) {
-    this.isEnacle = isEnacle;
+  public void setRightName(String rightName) {
+    this.rightName = rightName;
   }
 
 

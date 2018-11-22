@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jaswine.sso.dao.SysRoleDao">
+<mapper namespace="com.jaswine.core.dao.SysRoleDao">
 
+    <!--新建角色-->
+    <insert id="addRole" parameterType="com.jaswine.core.bean.SysRole">
+        INSERT INTO sysrole(id, rolename, parentid,
+                            enable, createtime, description)
+        VALUES (#{id},#{rolename},#{parentid},
+                #{enable},sysdate(),#{description})
+    </insert>
 
+    <!--删除角色-->
+    <delete id="delRole" parameterType="java.lang.String">
+        DELETE FROM sysrole WHERE id = #{id}
+    </delete>
+
+    <update id="updateRole" parameterType="com.jaswine.core.bean.SysRole">
+        UPDATE sysrole t SET t.rolename = #{rolename},t.parentid = #{parentid},t.enable = #{enable},t.description = #{description}
+    </update>
+
+    <select id="getRoles" resultType="com.jaswine.core.bean.SysRole">
+        SELECT * FROM sysrole
+    </select>
 </mapper>

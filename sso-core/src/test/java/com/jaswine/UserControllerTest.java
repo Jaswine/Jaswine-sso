@@ -1,6 +1,10 @@
 package com.jaswine;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jaswine.core.SsoCoreApplication;
+import com.jaswine.core.bean.SysUser;
+import com.jaswine.util.uuid.UUIDUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,13 +26,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  * UserController单元测试
- * @author Jasmine
+ * @author Jaswine
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SsoCoreApplication.class)
+@Slf4j
 public class UserControllerTest {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserControllerTest.class);
 
 	/**
 	 * 伪造的web环境
@@ -49,13 +53,39 @@ public class UserControllerTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
+	/**
+	 * 测试新增用户
+	 */
+	@Test
+	public void whenAddUserSuccess() throws Exception {
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		SysUser sysUser = new SysUser();
+		sysUser.setId(UUIDUtil.generateUUID());
+		sysUser.setUserName("admin");
+		sysUser.setPassword("000000");
+		sysUser.setNickName("超级用户");
+		sysUser.setTel("17621181642");
+		sysUser.setEmail("yuanzhi_wang@163.com");
+
+		String content = mapper.writeValueAsString(sysUser);
+		String result = mockMvc.perform(post("/sysuser/")
+				.content(content)
+				.contentType(MediaType.APPLICATION_JSON_UTF8))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.status").value(0))
+				.andReturn().getResponse().getContentAsString();
+		log.info("[UserControllerTest]测试新增用户成功,结果:{"+result+"}");
+	}
+
 
 	/**
 	 * 测试用户登录
 	 */
 	@Test
 	public void whenLoginSuccess() throws Exception {
-		LOGGER.info("Start-->测试用户登录成功");
+		log.info("[UserControllerTest]测试用户登录成功");
 		mockMvc.perform(post("/user/login")
 				.param("username", "jasmine")
 				.param("password", "jasmine")
@@ -64,6 +94,8 @@ public class UserControllerTest {
 				.andExpect(jsonPath("$.status").value(0));
 	}
 
+
+
 	/**
 	 * 测试通过用户名获取用户信息
 	 *
@@ -71,7 +103,7 @@ public class UserControllerTest {
 	 */
 	@Test
 	public void whenGetUserInfoByUsernameSuccess() throws Exception {
-		LOGGER.info("Start-->测试获得用户信息成功");
+		log.info("Start-->测试获得用户信息成功");
 		mockMvc.perform(get("/getUserInfo/Jaswine1")
 				.contentType(MediaType.APPLICATION_JSON_UTF8))
 				.andExpect(status().isOk())

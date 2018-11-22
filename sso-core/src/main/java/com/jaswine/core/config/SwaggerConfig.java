@@ -48,9 +48,9 @@ public class SwaggerConfig {
 	public ApiInfo apiInfo(){
 		LOGGER.info("[SwaggerConfig]==API创建者附属信息");
 		return new ApiInfoBuilder()
-				.title("RESTful APIs")
+				.title("Jaswine单点登录核心")
 				.description("Jaswine")
-				.termsOfServiceUrl("http://www.jaswine.club")
+				.termsOfServiceUrl("https://blog.jaswine.club")
 //				.contact("Jaswine")
 				.version("1.0")
 				.build();

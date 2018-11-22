@@ -1,4 +1,4 @@
-package com.jaswine.core.entity;
+package com.jaswine.core.bean;
 
 
 /**

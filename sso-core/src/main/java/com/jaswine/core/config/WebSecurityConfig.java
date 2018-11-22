@@ -1,13 +1,19 @@
 package com.jaswine.core.config;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.jaswine.core.security.DefaultUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
+
 
 /**
  * Web请求security配置
@@ -15,23 +21,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 @EnableWebSecurity
+@Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
 
+	@Autowired
+	private DefaultUserDetailsService defaultUserDetailsService;
 
-	/**
-	 * 基于内存的认证
-	 * @param auth 认证
-	 * @throws Exception 异常
-	 */
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-				.withUser("jasmine").password("Jasmine").roles("USER")
-				.and()
-				.withUser("wang").password("Jasmine").roles("ADMIN");
-	}
 
 	/**
 	 * 保护HTTP请求
@@ -46,6 +42,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.formLogin()
 				.and()
 				.httpBasic();
-		LOGGER.info("[WebSecurityConfig]配置HTTP安全");
+		log.info("[WebSecurityConfig]配置HTTP安全");
 	}
+
+	/**
+	 * 基于数据库的认证
+	 * @param auth 认证
+	 * @throws Exception 异常
+	 */
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(defaultUserDetailsService);
+		log.info("[WebSecurityConfig]基于数据库的权限认证");
+	}
+
+
+	/**
+	 * SpringSecurity密码加密
+	 *
+	 * @return BCryptPasswordEncoder
+	 */
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		log.info("[WebSecurityConfig]配置密码加密方式");
+		return new BCryptPasswordEncoder();
+	}
+
+
 }

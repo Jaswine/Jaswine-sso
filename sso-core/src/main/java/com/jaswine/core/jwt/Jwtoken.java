@@ -12,17 +12,26 @@ import java.util.Date;
  *
  * @author Jasmine
  */
-public class Jwtoken {
+public class Jwtoken extends JWT {
 
+	/**
+	 * 加密秘钥
+	 */
 	private static final String SECRET = "JwtToken";
+
 	private static final String USER = "JAVA_WEB";
+	/**
+	 * 使用的加密算法
+	 */
 	private static final Algorithm ALGORITHM = Algorithm.HMAC256(SECRET);
+	/**
+	 * token过期
+	 */
 	private static final String MATURITYERROR = "token已过期";
 
 
 	/**
 	 * 生成token
-	 *
 	 * @return token token字符串
 	 */
 	public static String createToken() {
@@ -31,10 +40,12 @@ public class Jwtoken {
 //			Map<String, Object> map = new HashMap<String, Object>();
 //			map.put("alg","HS256");
 //			map.put("typ","JWT");
+
+			Date createTime = new Date();
 			token = JWT.create()
 					.withIssuer(token)
 //					.withHeader(map)
-					.withIssuedAt(new Date())
+					.withIssuedAt(createTime)
 //					.withExpiresAt(expirsesDate)
 					.sign(ALGORITHM);
 		} catch (Exception e) {
@@ -46,7 +57,6 @@ public class Jwtoken {
 
 	/**
 	 * 验证token
-	 *
 	 * @param token token字符串
 	 * @return 验证信息
 	 */

@@ -13,9 +13,9 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
  * @author Jasmine
  */
 @Configuration
-public class MvcConfig {
+public class WebMvcConfig {
 
-	private Logger logger = LoggerFactory.getLogger(MvcConfig.class);
+	private Logger logger = LoggerFactory.getLogger(WebMvcConfig.class);
 
 	/**
 	 * 配置Json视图解析
